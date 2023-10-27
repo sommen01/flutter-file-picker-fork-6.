@@ -28,27 +28,27 @@ public class FileInfo {
         private long size;
         private byte[] bytes;
 
-        public Builder withPath(String path){
+        public Builder withPath(String path) {
             this.path = path;
             return this;
         }
 
-        public Builder withName(String name){
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder withSize(long size){
+        public Builder withSize(long size) {
             this.size = size;
             return this;
         }
 
-        public Builder withData(byte[] bytes){
+        public Builder withData(byte[] bytes) {
             this.bytes = bytes;
             return this;
         }
 
-        public Builder withUri(Uri uri){
+        public Builder withUri(Uri uri) {
             this.uri = uri;
             return this;
         }
@@ -57,7 +57,6 @@ public class FileInfo {
             return new FileInfo(this.path, this.name, this.uri, this.size, this.bytes);
         }
     }
-
 
     public HashMap<String, Object> toMap() {
         final HashMap<String, Object> data = new HashMap<>();

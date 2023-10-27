@@ -91,7 +91,11 @@ public class FilePickerPlugin implements MethodChannel.MethodCallHandler, Flutte
         @Override
         public void onActivityDestroyed(final Activity activity) {
             if (this.thisActivity == activity && activity.getApplicationContext() != null) {
-                ((Application) activity.getApplicationContext()).unregisterActivityLifecycleCallbacks(this); // Use getApplicationContext() to avoid casting failures
+                ((Application) activity.getApplicationContext()).unregisterActivityLifecycleCallbacks(this); // Use
+                                                                                                             // getApplicationContext()
+                                                                                                             // to avoid
+                                                                                                             // casting
+                                                                                                             // failures
             }
         }
 
@@ -120,8 +124,10 @@ public class FilePickerPlugin implements MethodChannel.MethodCallHandler, Flutte
     public static void registerWith(final io.flutter.plugin.common.PluginRegistry.Registrar registrar) {
 
         if (registrar.activity() == null) {
-            // If a background flutter view tries to register the plugin, there will be no activity from the registrar,
-            // we stop the registering process immediately because the ImagePicker requires an activity.
+            // If a background flutter view tries to register the plugin, there will be no
+            // activity from the registrar,
+            // we stop the registering process immediately because the ImagePicker requires
+            // an activity.
             return;
         }
 
@@ -135,7 +141,6 @@ public class FilePickerPlugin implements MethodChannel.MethodCallHandler, Flutte
         plugin.setup(registrar.messenger(), application, activity, registrar, null);
 
     }
-
 
     @SuppressWarnings("unchecked")
     @Override
@@ -165,8 +170,11 @@ public class FilePickerPlugin implements MethodChannel.MethodCallHandler, Flutte
             allowedExtensions = FileUtils.getMimeTypes((ArrayList<String>) arguments.get("allowedExtensions"));
         }
 
-        if (call.method != null && call.method.equals("custom") && (allowedExtensions == null || allowedExtensions.length == 0)) {
-            result.error(TAG, "Unsupported filter. Make sure that you are only using the extension without the dot, (ie., jpg instead of .jpg). This could also have happened because you are using an unsupported file extension.  If the problem persists, you may want to consider using FileType.all instead.", null);
+        if (call.method != null && call.method.equals("custom")
+                && (allowedExtensions == null || allowedExtensions.length == 0)) {
+            result.error(TAG,
+                    "Unsupported filter. Make sure that you are only using the extension without the dot, (ie., jpg instead of .jpg). This could also have happened because you are using an unsupported file extension.  If the problem persists, you may want to consider using FileType.all instead.",
+                    null);
         } else {
             this.delegate.startFileExplorer(fileType, isMultipleSelection, withData, allowedExtensions, result);
         }
@@ -193,7 +201,6 @@ public class FilePickerPlugin implements MethodChannel.MethodCallHandler, Flutte
                 return null;
         }
     }
-
 
     // MethodChannel.Result wrapper that responds on the platform thread.
     private static class MethodResultWrapper implements MethodChannel.Result {
@@ -240,7 +247,6 @@ public class FilePickerPlugin implements MethodChannel.MethodCallHandler, Flutte
         }
     }
 
-
     private void setup(
             final BinaryMessenger messenger,
             final Application application,
@@ -283,7 +289,7 @@ public class FilePickerPlugin implements MethodChannel.MethodCallHandler, Flutte
         this.activityBinding.removeActivityResultListener(this.delegate);
         this.activityBinding.removeRequestPermissionsResultListener(this.delegate);
         this.activityBinding = null;
-        if(this.observer != null) {
+        if (this.observer != null) {
             this.lifecycle.removeObserver(this.observer);
             this.application.unregisterActivityLifecycleCallbacks(this.observer);
         }
